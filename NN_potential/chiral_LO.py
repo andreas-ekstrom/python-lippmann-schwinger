@@ -11,18 +11,18 @@ Mp 	= 938.272 		     # proton mass  					  [MeV]
 Mn 	= 939.565 		     # neutron mass 					  [MeV]
 	
 # V(...) returns a list of length 6
-# The elements are on the form [V_S0, V_S1, V_mm, V_pm, V_mp, V_pp]
+# The elements are on the form [V_S0, V_S1, V_pp, V_mm, V_pm, V_mp]
 # where S0-> S=0, S1-> S=1, mm-> l=l'=J-1, mp-> l=J-1, l'=J+1, etc
 def V(qi, qo, coupled, S, J, T, Tz):
 
 	# model.V returns a list of length 6
-	# The elements are on the form [V_S0, V_S1, V_mm, V_pm, V_mp, V_pp]
+	# The elements are on the form [V_S0, V_S1, V_pp, V_mm, V_pm, V_mp]
 	# where S0-> S=0, S1-> S=1, mm-> l=l'=J-1, mp-> l=J-1, l'=J+1, etc
 	V_elements = OPEP.V(qi, qo, coupled, J)
 	
 	# LO contact terms
 	if J==0: V_elements[0] += C1S0 # contact term C1S0 at leading order
-	if J==1: V_elements[2] += C3S1 # contact term C3S1 at leading order
+	if J==1: V_elements[3] += C3S1 # contact term C3S1 at leading order
 
 	# define neucleon mass (as used in Machleidt)
 	if Tz==0:

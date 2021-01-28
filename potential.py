@@ -13,9 +13,7 @@ def V(p,pp,L,LL,S,J,T,Tz):
 
     # fac: pi factor (and sign-convention in L-LL-off-diagonal coupled channels)
     # RM corresponds to fac = +1 for idx 4,5 
-    #
-    sean_convention = True
-
+    
     assert(angmom.triag(L,S,J))
     assert(angmom.triag(LL,S,J))
     if L == LL:
@@ -24,14 +22,10 @@ def V(p,pp,L,LL,S,J,T,Tz):
             # --
             coup = 1
             idx  = 3
-            if sean_convention:
-                idx  = 2
         elif L>J:
             # ++
             coup = 1
             idx  = 2
-            if sean_convention:
-                idx  = 5
         else:
             if S==1:
                 coup = 0
@@ -45,22 +39,14 @@ def V(p,pp,L,LL,S,J,T,Tz):
             coup = 1
             idx  = 5
             fac  = -np.pi/2
-
-            if sean_convention:
-                idx  = 3
-                fac  = +np.pi/2
         else:
             # +-
             coup = 1
             idx  = 4
             fac  = -np.pi/2
-            if sean_convention:
-                idx  = 4
-                fac  = +np.pi/2
 
     # Seans potential
-    #pot = potential.chiral_LO()
-    #[V_uncoupled_S0, V_uncoupled_S1, V_coupled_mm, V_coupled_pm, V_coupled_mp, V_coupled_pp]
+    # [V_uncoupled_S0, V_uncoupled_S1, V_coupled_pp, V_coupled_mm, V_coupled_pm, V_coupled_mp]
     V = potential.V(p,pp,coup,S,J,T,Tz)[idx]*fac
 
     # pychp

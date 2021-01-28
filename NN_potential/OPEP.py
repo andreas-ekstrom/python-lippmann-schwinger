@@ -37,6 +37,7 @@ def isoFac(L, S):
 	return isoFactor
 
 # All taken from Erkelenz's paper on "momentum space calculations and helicity formalism in nuclear physics" (Nucl. Phys. A176 (1971) 413-432)
+# Note that in Erkelenz's paper, the (+-)-symbolism is confusing! (+-) there is actually (-+) for <L'SJ|V|LSJ> where L'=J-1, L=J+1
 def V(qi, qo, coupled, J):
 	
 	# Angular integrals
@@ -66,18 +67,19 @@ def V(qi, qo, coupled, J):
 
 		if J!=0:	# These cannot exist for 3P0-wave
 			V_coupled_mm    = (2./(2*J+1)) * ((qo**2+qi**2)*integral_M - 2*qo*qi*integral_0)
-			V_coupled_pm    = (4*np.sqrt(J*(J+1))/(2*J+1)) * (qi**2*integral_P + qo**2*integral_M - 2*qo*qi*integral_0)
-			V_coupled_mp    = (4*np.sqrt(J*(J+1))/(2*J+1)) * (qi**2*integral_M + qo**2*integral_P - 2*qo*qi*integral_0)
+			V_coupled_mp    = (4*np.sqrt(J*(J+1))/(2*J+1)) * (qi**2*integral_P + qo**2*integral_M - 2*qo*qi*integral_0)
+			V_coupled_pm    = (4*np.sqrt(J*(J+1))/(2*J+1)) * (qi**2*integral_M + qo**2*integral_P - 2*qo*qi*integral_0)
 		
 			V_coupled_mm   *= isoFac(J-1,1)
-			V_coupled_pm   *= isoFac(J-1,1)
-			V_coupled_mp   *= isoFac(J+1,1)
+			V_coupled_mp   *= isoFac(J-1,1)
+			V_coupled_pm   *= isoFac(J+1,1)
 
 		V_coupled_pp    = (2./(2*J+1)) * (-(qo**2+qi**2)*integral_P + 2*qo*qi*integral_0)
 		V_coupled_pp   *= isoFac(J+1,1)
-		
-	return [V_uncoupled_S0, V_uncoupled_S1, V_coupled_mm, V_coupled_pm, V_coupled_mp, V_coupled_pp]
-			
+	
+	# Return elements using Machleidt's nuclear potential convention (note the (-) on off-diagonal, coupled elements)
+	return [V_uncoupled_S0, V_uncoupled_S1, V_coupled_pp, V_coupled_mm, -V_coupled_pm, -V_coupled_mp]
+	
 def ang_Integral(qi, qo, J, l):
 	#this is roughly 20x faster than writing it explicitly in a for-loop
 	integrand = np.sum(w * pot_OPEP_mom(qi,qo,x) * x**l * find_root(J, x))

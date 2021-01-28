@@ -59,9 +59,9 @@ def V(p,pp,L,LL,S,J,T,Tz):
                 fac  = +np.pi/2
 
     # Seans potential
-    pot = potential.chiral_LO()
+    #pot = potential.chiral_LO()
     #[V_uncoupled_S0, V_uncoupled_S1, V_coupled_mm, V_coupled_pm, V_coupled_mp, V_coupled_pp]
-    V = pot.V(p,pp,coup,S,J,T,Tz)[idx]*fac
+    V = potential.V(p,pp,coup,S,J,T,Tz)[idx]*fac
 
     # pychp
     #V = pychp.V(p,pp,coup,S,J,T,Tz)[idx]*fac
@@ -140,7 +140,7 @@ def setup_V(NN_channel, pmesh, Tlab):
             ko2 = 2*const.mp*Tlab
         elif NN_channel[0]['tz'] ==  0:
             mu = const.uN
-            ko2 = const.mp**2*Tlab*(Tlab+2*const.mn)/((const.mp+const.mn)**2 + 2*Tlab*const.mp)
+            ko2 = const.mn**2*Tlab*(Tlab+2*const.mp)/((const.mp+const.mn)**2 + 2*Tlab*const.mn)
         elif NN_channel[0]['tz'] == +1:
             mu = const.mN/2
             ko2 = 2*const.mp*Tlab

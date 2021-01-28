@@ -11,7 +11,7 @@ basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=0)
 NN_channels = qs.setup_NN_channels(basis)
 
 # setup a gauss legendre momentum mesh in MeV/c
-Np = 30
+Np = 100
 
 p, w = mesh.gauss_legendre_inf_mesh(Np)
 

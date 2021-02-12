@@ -9,6 +9,10 @@ def triag(a, b, ab):
     return True
 
 def kroenecker_delta(bra,ket,*args):
+    """
+    *args används när antalet argument är
+    okänt, kan varieras vid runtime
+    """
     for ar in args:
         if bra[ar] != ket[ar]:
             return False

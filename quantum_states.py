@@ -62,7 +62,7 @@ def setup_NN_channels(basis):
                 """
                 Här undersöks huruvida de relevanta storheterna är konserverade efter 
                 spridning. Argumenten 'j','tz','s','pi' är återigen index för värdena
-                på kvanttalen i tillstånds listorna "bra" och "ket", som representerar
+                på kvanttalen i tillståndslistorna "bra" och "ket", som representerar
                 tillstånden innan och efter spridning. Kroeneckers delta returnerar
                 true om kvanttalen är samma i "bra" och "ket".
                 """

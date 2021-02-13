@@ -6,7 +6,7 @@ import numpy as nppyt
 import auxiliary as aux
 
 # NN basis states
-basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=0)
+basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=2)
 
 
 # channels: all 2b channels with conserved J T Pi (and S)

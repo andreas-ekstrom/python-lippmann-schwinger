@@ -45,7 +45,7 @@ def V(p,pp,L,LL,S,J,T,Tz):
             idx  = 4
             fac  = -np.pi/2
 
-    # Seans potential
+    # Seans potential är stort
     # [V_uncoupled_S0, V_uncoupled_S1, V_coupled_pp, V_coupled_mm, V_coupled_pm, V_coupled_mp]
     V = potential.V(p,pp,coup,S,J,T,Tz)[idx]*fac
 

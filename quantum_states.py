@@ -122,6 +122,11 @@ def setup_NN_channels(basis):
             print('  block:',block)
             """
             What's the 0 in chn[0]["qn"]?
+            
+            Tror grejen är att varje channel innehåller olika tillstånd med samma kvanttal, så för att
+            beskriva kvanttalen för en kanal behöver du bara kolla på ett tillstånd. chn[0] tar ut det
+            första elementet, och ['qn'] tar ut kvanttalet. chn[0] skulle kunna ersättas med typ chn[1]
+            om man hade velat det.
 
             Link to explaination of %d
             https://www.learnpython.org/en/String_Formatting

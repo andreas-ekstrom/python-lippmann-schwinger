@@ -6,7 +6,7 @@ import numpy as nppyt
 import auxiliary as aux
 
 # NN basis states
-basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=2)
+basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=0)
 
 
 # channels: all 2b channels with conserved J T Pi (and S)
@@ -23,15 +23,20 @@ https://numpy.org/doc/stable/reference/generated/numpy.polynomial.legendre.legga
 """
 p, w = mesh.gauss_legendre_inf_mesh(Np)
 
-
+print(p[99])
 Tlab = 100.0
 
 #select a specific channel
-NN_channel = NN_channels[5]
+NN_channel = NN_channels[0]
+
+temp = pot.V(5,5,0,0,0,0,1,0)
+
+print(temp)
 
 #setup the strong interaction potential in this channel
 #(convert Tlab to prel)
 V, ko = pot.setup_V(NN_channel,p,Tlab)
+#print(V[10,10])
 
 #solve the T matrix in a specific channel
 T = sc.compute_Tmatrix(NN_channel,V,ko,p,w)

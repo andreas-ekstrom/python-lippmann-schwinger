@@ -4,6 +4,7 @@ import scattering as sc
 import potential as pot
 import numpy as nppyt
 import auxiliary as aux
+import csv
 
 # NN basis states
 basis = qs.setup_NN_basis(j2min=0,j2max=2,tzmin=0,tzmax=0)
@@ -23,22 +24,34 @@ https://numpy.org/doc/stable/reference/generated/numpy.polynomial.legendre.legga
 """
 p, w = mesh.gauss_legendre_inf_mesh(Np)
 
-print(p[99])
-Tlab = 100.0
-
+#print(p[99])
+#Tlab = 100.0
 #select a specific channel
 NN_channel = NN_channels[0]
 
-temp = pot.V(5,5,0,0,0,0,1,0)
-
-print(temp)
+#temp = pot.V(5,5,0,0,0,0,1,0)
+#print(temp)
 
 #setup the strong interaction potential in this channel
 #(convert Tlab to prel)
-V, ko = pot.setup_V(NN_channel,p,Tlab)
-#print(V[10,10])
+data = []
+with open("fas_py.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    for i in range(1,1750):
+        Tlab = 0.2*i
+        V, ko = pot.setup_V(NN_channel,p,Tlab)
+    #print(V[10,10])
 
-#solve the T matrix in a specific channel
-T = sc.compute_Tmatrix(NN_channel,V,ko,p,w)
-phase = sc.compute_phase_shifts(NN_channel,ko,T)
-print(phase)
+    #solve the T matrix in a specific channel
+        T = sc.compute_Tmatrix(NN_channel,V,ko,p,w)
+        phase = sc.compute_phase_shifts(NN_channel,ko,T)
+        #phase = phase.real
+        phase = phase[0][0]
+        phase = phase.real
+        print(phase)
+        print(Tlab)
+        writer.writerow([phase, Tlab])
+        
+print("klar :)")
+
+#print(phase)

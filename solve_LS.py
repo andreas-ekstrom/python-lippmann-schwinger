@@ -18,14 +18,14 @@ https://www.asc.ohio-state.edu/physics/ntg/8805/notes/section_5_Scattering_2.pdf
 NN_channels = qs.setup_NN_channels(basis)
 
 # setup a gauss legendre momentum mesh in MeV/c
-Np = 100
+#Np = 100
 """
 https://numpy.org/doc/stable/reference/generated/numpy.polynomial.legendre.leggauss.html
 """
-p, w = mesh.gauss_legendre_inf_mesh(Np)
+
 
 #print(p[99])
-#Tlab = 100.0
+Tlab = 100.0
 #select a specific channel
 NN_channel = NN_channels[0]
 
@@ -34,11 +34,10 @@ NN_channel = NN_channels[0]
 
 #setup the strong interaction potential in this channel
 #(convert Tlab to prel)
-data = []
-with open("fas_py.csv", "w", newline="") as file:
+with open("fasN_py.csv", "w", newline="") as file:
     writer = csv.writer(file)
-    for i in range(1,1750):
-        Tlab = 0.2*i
+    for Np in range(3,501):
+        p, w = mesh.gauss_legendre_inf_mesh(Np)
         V, ko = pot.setup_V(NN_channel,p,Tlab)
     #print(V[10,10])
 
@@ -49,8 +48,8 @@ with open("fas_py.csv", "w", newline="") as file:
         phase = phase[0][0]
         phase = phase.real
         print(phase)
-        print(Tlab)
-        writer.writerow([phase, Tlab])
+        print(Np)
+        writer.writerow([phase, Np])
         
 print("klar :)")
 

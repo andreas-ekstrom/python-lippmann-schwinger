@@ -35,7 +35,7 @@ NN_channel = NN_channels[0]
 #setup the strong interaction potential in this channel
 #(convert Tlab to prel)
 data = []
-with open("fas_py.csv", "w", newline="") as file:
+with open("fas_img_py.csv", "w", newline="") as file:
     writer = csv.writer(file)
     for i in range(1,1750):
         Tlab = 0.2*i
@@ -47,7 +47,7 @@ with open("fas_py.csv", "w", newline="") as file:
         phase = sc.compute_phase_shifts(NN_channel,ko,T)
         #phase = phase.real
         phase = phase[0][0]
-        phase = phase.real
+        phase = phase.imag
         print(phase)
         print(Tlab)
         writer.writerow([phase, Tlab])

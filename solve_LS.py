@@ -22,7 +22,7 @@ Np = 100
 """
 https://numpy.org/doc/stable/reference/generated/numpy.polynomial.legendre.leggauss.html
 """
-p, w = mesh.gauss_legendre_inf_mesh(Np)
+
 
 #print(p[99])
 #Tlab = 100.0
@@ -37,20 +37,20 @@ NN_channel = NN_channels[0]
 data = []
 with open("fas_py.csv", "w", newline="") as file:
     writer = csv.writer(file)
-    for i in range(1,1750):
-        Tlab = 0.2*i
-        V, ko = pot.setup_V(NN_channel,p,Tlab)
-    #print(V[10,10])
+    for Tlab in range(1,1750):
+        for Np in range(3,101):
+            p, w = mesh.gauss_legendre_inf_mesh(Np)
+            V, ko = pot.setup_V(NN_channel,p,Tlab)
+            #print(V[10,10])
 
-    #solve the T matrix in a specific channel
-        T = sc.compute_Tmatrix(NN_channel,V,ko,p,w)
-        phase = sc.compute_phase_shifts(NN_channel,ko,T)
-        #phase = phase.real
-        phase = phase[0][0]
-        phase = phase.real
-        print(phase)
+            #solve the T matrix in a specific channel
+            T = sc.compute_Tmatrix(NN_channel,V,ko,p,w)
+            phase = sc.compute_phase_shifts(NN_channel,ko,T)
+            #phase = phase.real
+            phase = phase[0][0]
+            phase = phase.real
+            writer.writerow([Tlab, phase, Np])
         print(Tlab)
-        writer.writerow([phase, Tlab])
         
 print("klar :)")
 

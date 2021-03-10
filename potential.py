@@ -108,7 +108,7 @@ def setup_V(NN_channel, pmesh, Tlab):
     Np_chn = np.sqrt(nof_chns)*Np
         
     chn_idx = NN_channel[0]['chn_idx']
-    print('populating Vmtx in channel %d'%(chn_idx))
+    #print('populating Vmtx in channel %d'%(chn_idx))
         
     m = []
 

@@ -33,7 +33,7 @@ def setup_VG_kernel(chn,V,ko,p,w):
 
     nof_blocks = len(chn)
     chn_idx = chn[0]['chn_idx']
-    print('setting up G_0(ko) in channel %d'%(chn_idx))
+    #print('setting up G_0(ko) in channel %d'%(chn_idx))
     
     Np_chn = np.int(np.sqrt(nof_blocks)*(Np+1))
 
@@ -55,7 +55,7 @@ def compute_Tmatrix(NN_channel,V,ko,p,w):
     VG = setup_VG_kernel(NN_channel,V,ko,p,w)
     # T = (1-VG)^{-1}V
     eye_VG =  np.eye(VG.shape[0]) - (2.0/np.pi)*VG
-    print('solving for the complex T-matrix in channel %d'%(chn_idx))
+    #print('solving for the complex T-matrix in channel %d'%(chn_idx))
     Tmtx = np.matmul(np.linalg.inv(eye_VG),V)
 
     return Tmtx
@@ -76,7 +76,7 @@ def compute_phase_shifts(NN_channel,ko,T):
     
     nof_blocks = len(NN_channel)
     chn_idx = NN_channel[0]['chn_idx']
-    print('computing phase shifts in channel %d'%(chn_idx))
+    #print('computing phase shifts in channel %d'%(chn_idx))
         
     Np = T.shape[0]
     if NN_channel[0]['tz'] == -1:
